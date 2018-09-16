@@ -30,7 +30,7 @@ project {
 
     buildType(Build)
     var enviroments = arrayOf("test","ci")
-    enviroments.forEach { buildType(MyTestBuild("Test enviroment $it")) }
+    enviroments.forEach { buildType(MyTestBuild("$it")) }
 
 }
 
@@ -59,7 +59,8 @@ object Build : BuildType({
 
 class MyTestBuild(btName:String) : BuildType({
 
-    name = btName
+    name = "Test enviroment $btName"
+    id("${id}_{$btName}")
 
     vcs {
         root(DslContext.settingsRoot)
