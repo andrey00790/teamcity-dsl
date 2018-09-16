@@ -60,7 +60,7 @@ object Build : BuildType({
 class MyTestBuild(btName:String) : BuildType({
 
     name = "Test enviroment $btName"
-    id("${id}_{$btName}")
+    id("${id}_${btName}")
 
     vcs {
         root(DslContext.settingsRoot)

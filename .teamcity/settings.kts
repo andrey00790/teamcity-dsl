@@ -28,9 +28,9 @@ version = "2018.1"
 
 project {
 
-    buildType(Build)
     var enviroments = arrayOf("test","ci")
     enviroments.forEach { buildType(MyTestBuild("$it")) }
+    buildType(Build)
 
 }
 
@@ -60,7 +60,7 @@ object Build : BuildType({
 class MyTestBuild(btName:String) : BuildType({
 
     name = "Test enviroment $btName"
-    id("${id}_{$btName}")
+    id("${id}_${btName}")
 
     vcs {
         root(DslContext.settingsRoot)
