@@ -28,9 +28,10 @@ version = "2018.1"
 
 project {
 
+    buildType(Build)
     var enviroments = arrayOf("test","ci")
     enviroments.forEach { buildType(MyTestBuild("Test enviroment $it")) }
-    buildType(Build)
+
 }
 
 object Build : BuildType({
