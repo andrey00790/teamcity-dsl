@@ -1,6 +1,8 @@
 import jetbrains.buildServer.configs.kotlin.v2018_1.*
 import jetbrains.buildServer.configs.kotlin.v2018_1.buildSteps.gradle
 import jetbrains.buildServer.configs.kotlin.v2018_1.triggers.vcs
+import buildTypes.*
+
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -28,54 +30,16 @@ version = "2018.1"
 
 project {
 
-    var enviroments = arrayOf("test","ci")
-    enviroments.forEach { buildType(MyTestBuild("$it")) }
+    var platforms = arrayOf("test","ci").map { MyTestBuild("$it") }
+    platforms.forEach { buildType(it) }
+
+    buildType(MyProject_MasterTest(platforms))
+
     buildType(Build)
 
 }
 
-object Build : BuildType({
-    name = "Build"
-
-    vcs {
-        root(DslContext.settingsRoot)
-    }
-
-    steps {
-
-        gradle {
-            tasks = "clean build"
-            buildFile = ""
-            gradleWrapperPath = ""
-        }
-    }
-
-    triggers {
-        vcs {
-        }
-    }
-})
 
 
-class MyTestBuild(btName:String) : BuildType({
 
-    name = "Test enviroment $btName"
-    id("${id}_${btName}")
 
-    vcs {
-        root(DslContext.settingsRoot)
-    }
-
-    steps {
-        gradle {
-            name
-            tasks = "clean test"
-        }
-
-    }
-
-    triggers {
-        vcs {
-        }
-    }
-})
