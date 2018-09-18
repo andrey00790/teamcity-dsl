@@ -4,6 +4,7 @@ import jetbrains.buildServer.configs.kotlin.v2018_1.BuildType
 import jetbrains.buildServer.configs.kotlin.v2018_1.DslContext
 import jetbrains.buildServer.configs.kotlin.v2018_1.ParametrizedWithType
 import jetbrains.buildServer.configs.kotlin.v2018_1.buildSteps.gradle
+import jetbrains.buildServer.configs.kotlin.v2018_1.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2018_1.triggers.vcs
 import kotlin.script.dependencies.Environment
 
@@ -13,6 +14,11 @@ init: GradleTestContext.() -> Unit = {}
 
     name = "MyGradleTest"
     id(name)
+
+    params {
+        param("env.deploy.environment", "test")
+    }
+
 
     val context = GradleTestContext()
     context.init()
@@ -24,6 +30,13 @@ init: GradleTestContext.() -> Unit = {}
 
 
     steps {
+        script {
+            scriptContent = """
+                #!/usr/bin/env bash
+                set -e
+                echo "test %deploy.environment%"
+            """.trimIndent()
+        }
         gradle {
             name
             this.tasks = tasks
