@@ -16,7 +16,7 @@ init: GradleTestContext.() -> Unit = {}
     id(name)
 
     params {
-        param("env.deploy.environment", "test")
+        param("deploy.environment", "test")
     }
 
 
