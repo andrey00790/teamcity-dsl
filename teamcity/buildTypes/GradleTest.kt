@@ -9,14 +9,16 @@ import jetbrains.buildServer.configs.kotlin.v2018_1.triggers.vcs
 import kotlin.script.dependencies.Environment
 
 class GradleTest(val tasks: String,
-init: GradleTestContext.() -> Unit = {}
+                 init: GradleTestContext.() -> Unit = {}
 ):BuildType({
 
     name = "MyGradleTest"
     id(name)
 
+    
     params {
         param("deploy.environment", "test")
+        param("tests.versionBuild","${'$'}VERSION")
     }
 
 
@@ -29,12 +31,16 @@ init: GradleTestContext.() -> Unit = {}
     }
 
 
+
+
     steps {
         script {
             scriptContent = """
                 #!/usr/bin/env bash
                 set -e
                 echo "test %deploy.environment%"
+
+                echo "%tests.versionBuild%"
             """.trimIndent()
         }
         gradle {
