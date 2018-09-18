@@ -16,7 +16,8 @@ class GradleTest(val tasks: String,
     id(name)
 
     params {
-        param("deploy.environment", "test")
+        param("deploy.environment", "test"),
+        patam("tests.versionBuild","${'$'}VERSION")
     }
 
 
@@ -29,12 +30,16 @@ class GradleTest(val tasks: String,
     }
 
 
+
+
     steps {
         script {
             scriptContent = """
                 #!/usr/bin/env bash
                 set -e
                 echo "test %deploy.environment%"
+
+                echo "%tests.versionBuild%"
             """.trimIndent()
         }
         gradle {
