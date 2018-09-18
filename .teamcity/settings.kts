@@ -34,6 +34,7 @@ project {
     platforms.forEach { buildType(it) }
 
     buildType(MyProject_MasterTest(platforms))
+    buildType(GradleTest("clean test") {envVariables = mapOf("CONSUL_HOST" to "127.0.0.1")})
 
     buildType(Build)
 

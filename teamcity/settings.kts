@@ -31,9 +31,11 @@ version = "2018.1"
 project {
 
     buildType(Build)
-    var platforms = arrayOf("test","ci").map { MyTestBuild("$it") }
+    var platforms = arrayOf("test","ci").map { MyTestBuild(it) }
     platforms.forEach { buildType(it) }
 
+
+    buildType(GradleTest("clean test") {envVariables = mapOf("CONSUL_HOST" to "127.0.0.1")})
     buildType(MyProject_MasterTest(platforms))
 
 }
