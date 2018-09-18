@@ -16,7 +16,7 @@ class GradleTest(val tasks: String,
     id(name)
 
     params {
-        param("deploy.environment", "test"),
+        param("deploy.environment", "test")
         patam("tests.versionBuild","${'$'}VERSION")
     }
 
