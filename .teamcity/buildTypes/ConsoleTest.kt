@@ -36,7 +36,7 @@ open class ConsoleTest(
 
                 echo "%tests.versionBuild%"
 
-                make test
+                gradle clean test
 
             """.trimIndent()
         }
