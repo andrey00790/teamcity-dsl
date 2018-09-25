@@ -38,7 +38,7 @@ open class ConsoleTest(
 
                 gradle clean test
 
-                echo "##teamcity[importData type='junit' path='%system.teamcity.build.workingDir%/test-results/test/*.xml']"
+                echo "##teamcity[importData type='junit' path='%system.teamcity.build.workingDir%/build/test-results/test/*.xml']"
 
             """.trimIndent()
         }
