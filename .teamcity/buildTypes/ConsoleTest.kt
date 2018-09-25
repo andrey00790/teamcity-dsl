@@ -38,6 +38,7 @@ open class ConsoleTest(
 
                 gradle clean test
 
+                echo "##teamcity[importData type='junit' path='${'$'}(MSBuildProjectDirectory)\test\test-results.xml']"
 
             """.trimIndent()
         }
