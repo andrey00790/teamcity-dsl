@@ -38,6 +38,8 @@ open class ConsoleTest(
 
                 make test
 
+                ##teamcity[importData type='junit' path='**/*.xml']
+
             """.trimIndent()
         }
     }
