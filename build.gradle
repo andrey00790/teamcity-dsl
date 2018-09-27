@@ -33,9 +33,3 @@ dependencies {
     testCompile('io.projectreactor:reactor-test')
 }
 
-
-test {
-    reports {
-        junitXml.enabled = true 
-    }
-}
