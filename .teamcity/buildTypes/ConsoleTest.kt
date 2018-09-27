@@ -31,12 +31,12 @@ open class ConsoleTest(
         script {
             scriptContent = """
                 #!/usr/bin/env bash
-                set -e
+
                 echo "test %deploy.environment%"
 
                 echo "%tests.versionBuild%"
 
-                gradle clean test
+                make test
 
                 echo "##teamcity[importData type='junit' path='%system.teamcity.build.workingDir%/build/test-results/test/*.xml']"
 
